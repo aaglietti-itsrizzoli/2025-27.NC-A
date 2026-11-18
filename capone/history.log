@@ -1,0 +1,5 @@
+    1  git commit --amend -m "commit" && git push --force-with-lease origin main
+    2  cd capone
+    3  terraform -v
+    4  terraform init
+    5  history >> history.log
