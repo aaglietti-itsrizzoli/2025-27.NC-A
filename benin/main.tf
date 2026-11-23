@@ -18,7 +18,7 @@ variable "vm_count" {
   default     = 5
 }
 
-resource "google_compute_instance" "vm" {
+resource "google_compute_instance" "pippo" {
   for_each     = toset([for i in range(var.vm_count) : tostring(i + 1)])
   name         = "benin-vm-${each.key}"
   machine_type = "e2-micro"
