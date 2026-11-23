@@ -8,5 +8,6 @@ terraform {
 }
 
 provider "google" {
-  # Configuration options
+  # configuration options
+  project - "exalted-pattern-424313-j3"
 }
