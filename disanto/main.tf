@@ -10,7 +10,7 @@ terraform {
 provider "google" {
   # Configuration options
   project     = "exalted-pattern-424313-j3"
-  credentials = file("${path.module}/../exalted-pattern-424313-j3-41106fd4cb4e.json")
+  credentials = file("${path.module}/../disanto/exalted-pattern-424313-j3-41106fd4cb4e.json")
 }
 
 resource "google_compute_instance" "debian12" {
