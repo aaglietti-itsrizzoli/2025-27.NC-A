@@ -1,0 +1,5 @@
+    1  commit
+    2  terraform -v
+    3  terraform init
+    4  histoty >> history.log
+    5  history >> history.log
