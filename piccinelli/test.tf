@@ -13,7 +13,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "gordon" {
-  for_each = toset([for i in range(5) : "piccinelli-${i + 1}"])
+  for_each = toset([for i in range(3) : "piccinelli-${i+1}"])
 
   name         = each.key
   machine_type = "e2-micro"
