@@ -27,7 +27,7 @@ resource "google_compute_instance" "pippo" {
   count        = var.instance_count
   name         = "wan-${count.index + 1}"
   machine_type = "e2-micro"
-  zone         = "us-central1-b"
+  zone         = "europe-west1-b"
 
   boot_disk {
     initialize_params {
