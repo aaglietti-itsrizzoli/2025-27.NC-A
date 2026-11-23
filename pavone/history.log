@@ -170,3 +170,5 @@ EOF
    32  terraform fmt
    33  terraform apply -auto-approve
    34  history >> history.log
+    1  cd /workspaces/2025-27.NC-A/pavone
+    2  history >> history.log
