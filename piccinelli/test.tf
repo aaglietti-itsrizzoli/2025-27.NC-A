@@ -10,12 +10,14 @@ terraform {
 provider "google" {
   project = "exalted-pattern-424313-j3"
   #region  = "us-central1"
-  zone = "us-central1-a"
 }
 
 resource "google_compute_instance" "gordon" {
-  name         = "piccinelli"
+  for_each = toset([for i in range(5) : "piccinelli-${i + 1}"])
+
+  name         = each.key
   machine_type = "e2-micro"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
