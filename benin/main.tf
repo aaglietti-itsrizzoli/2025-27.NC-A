@@ -12,8 +12,15 @@ provider "google" {
   project = "exalted-pattern-424313-j3"
 }
 
-resource "google_compute_instance" "pippo" {
-  name         = "benin"
+variable "vm_count" {
+  description = "Numero di macchine virtuali da creare"
+  type        = number
+  default     = 5
+}
+
+resource "google_compute_instance" "vm" {
+  for_each     = toset([for i in range(var.vm_count) : tostring(i + 1)])
+  name         = "vm-benin-${each.key}"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
 
