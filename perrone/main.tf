@@ -13,7 +13,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "pippo" {
-  name         = "debian12-vm"
+  name         = "perrone"
   machine_type = "e2-micro"
   zone         = "europe-west1-b"
 
