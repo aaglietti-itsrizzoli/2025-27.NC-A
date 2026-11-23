@@ -20,7 +20,7 @@ variable "vm_count" {
 
 resource "google_compute_instance" "vm" {
   for_each     = toset([for i in range(var.vm_count) : tostring(i + 1)])
-  name         = "vm-benin-${each.key}"
+  name         = "benin-vm-${each.key}"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
 
