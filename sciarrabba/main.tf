@@ -7,26 +7,35 @@ terraform {
   }
 }
 
+variable "numero_vm" {
+  description = "Quante VM Debian 12 creare"
+  type        = number
+  default     = 5
+}
+
 provider "google" {
-  # Configuration options
   project = "exalted-pattern-424313-j3"
  # region  = "us-central1"
   zone    = "us-central1-a"
 }
 
 resource "google_compute_instance" "vm_minima" {
-  name         = "sciarrabba"
+  count        = var.numero_vm
+  name         = "vm-sciarrabba-${count.index + 1}"
   machine_type = "e2-micro"
+  zone    = "us-central1-a"
+
 
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-12"
-     # size  = 10            # GB, il minimo per l'immagine Debian 12
-     # type  = "pd-standard" # il tipo di disco più economico
+   #   size  = 10
+    #  type  = "pd-standard"
     }
   }
 
   network_interface {
     network = "default"
+    access_config {}
   }
 }
