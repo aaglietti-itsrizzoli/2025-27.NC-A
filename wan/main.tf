@@ -12,10 +12,22 @@ provider "google" {
   project = "exalted-pattern-424313-j3"
 }
 
+variable "instance_count" {
+  description = "Numero di istanze VM da creare"
+  type        = number
+  default     = 3
+
+  validation {
+    condition     = var.instance_count >= 1
+    error_message = "instance_count deve essere almeno 1."
+  }
+}
+
 resource "google_compute_instance" "pippo" {
-  name         = "wan"
+  count        = var.instance_count
+  name         = "wan-${count.index + 1}"
   machine_type = "e2-micro"
-  zone         = "us-central1-a"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
