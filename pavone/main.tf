@@ -14,8 +14,15 @@ provider "google" {
   zone        = "us-central1-b"
 }
 
+variable "numero_vm" {
+  description = "Numero di macchine virtuali da creare"
+  type        = number
+  default     = 3
+}
+
 resource "google_compute_instance" "vm" {
-  name         = "pavone"
+  count        = var.numero_vm
+  name         = "pavone-${count.index + 1}"
   machine_type = "e2-micro"
 
   boot_disk {
@@ -27,4 +34,9 @@ resource "google_compute_instance" "vm" {
   network_interface {
     network = "default"
   }
+}
+
+output "macchine_create" {
+  description = "Elenco delle macchine virtuali create"
+  value       = [for m in google_compute_instance.vm : m.name]
 }
