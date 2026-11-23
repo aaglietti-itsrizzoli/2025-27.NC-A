@@ -1,0 +1,14 @@
+    1  gitstatus
+    2  git status
+    3  git add
+    4  git commit -m "add manenti"
+    5  git add
+    6  git add .
+    7  git commit -m "add main.tf"
+    8  git push
+    9  cd /workspace/2025-27 .NC-A/manenti
+   10  cd manenti
+   11  cd /workspace/2025-27 .NC-A/manenti
+   12  terraform -v
+   13  terraform init 
+   14  history >> history.log
