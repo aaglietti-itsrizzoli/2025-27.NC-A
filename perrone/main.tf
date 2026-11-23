@@ -1,4 +1,6 @@
 terraform {
+  required_version = ">= 1.1.0"
+
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -12,10 +14,25 @@ provider "google" {
   project = "exalted-pattern-424313-j3"
 }
 
+variable "numero_macchine" {
+  type    = number
+  default = 3
+}
+
+moved {
+  from = google_compute_instance.pippo
+  to   = google_compute_instance.pippo["perrone"]
+}
+
 resource "google_compute_instance" "pippo" {
-  name         = "perrone"
+  for_each = toset([
+    for i in range(var.numero_macchine) :
+    i == 0 ? "perrone" : "perrone-${i + 1}"
+  ])
+
+  name         = each.key
   machine_type = "e2-micro"
-  zone         = "europe-west1-b"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
