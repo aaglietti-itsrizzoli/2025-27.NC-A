@@ -15,7 +15,7 @@ provider "google" {
 variable "vm_count" {
   description = "Numero di macchine virtuali Debian da creare"
   type        = number
-  default     = 1
+  default     = 3
 
   validation {
     condition     = var.vm_count >= 1 && var.vm_count == floor(var.vm_count)
@@ -28,7 +28,7 @@ data "google_compute_image" "debian_12" {
   family  = "debian-12"
 }
 
-resource "google_compute_instance" "elarfaoui" {
+resource "google_compute_instance" "pluto" {
   count        = var.vm_count
   name         = "elarfaoui-${count.index + 1}"
   machine_type = "e2-micro"
