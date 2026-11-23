@@ -11,3 +11,21 @@ provider "google" {
   # Configuration options
   project = "exalted-pattern-424313-j3"
 }
+
+resource "google_compute_instance" "debian12" {
+  name         = "sakaj"
+  machine_type = "e2-micro"
+  zone         = "us-central1-a"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-12"
+      #size  = 10
+      #type  = "pd-standard"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
