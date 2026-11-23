@@ -10,22 +10,29 @@ terraform {
 
 provider "google" {
   # Configuration options
-  project = "exalted-pattern-424313-j3"
-  #region  = "us-central1"
-  zone = "us-central1-a"
+  project     = "exalted-pattern-424313-j3"
+  region      = "us-central1"
+  zone        = "us-central1-a"
+  credentials = file("../exalted-pattern-424313-j3-41106fd4cb4e.json")
 }
 
-# VM al costo minimo: e2-micro (rientra nel Free Tier in us-central1, us-west1, us-east1)
+# Cambia solo questo numero per creare più o meno VM identiche
+variable "vm_count" {
+  type    = number
+  default = 4
+}
+
 resource "google_compute_instance" "vm_debian" {
-  name         = "vm-debian12"
+  count        = var.vm_count
+  name         = "manenti-${count.index + 1}" # vm-debian12-1, -2, -3, ...
   machine_type = "e2-micro"
   zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-12" # ultima immagine Debian 12 (bookworm)
-      #size  = 10                       # GB, minimo per l'immagine
-      #type  = "pd-standard"            # disco più economico (Free Tier fino a 30 GB)
+      image = "debian-cloud/debian-12"
+      size  = 10
+      type  = "pd-standard"
     }
   }
 
