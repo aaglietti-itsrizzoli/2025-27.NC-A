@@ -11,10 +11,19 @@ provider "google" {
   project = "exalted-pattern-424313-j3"
 }
 
+# 1. Variabile per definire il numero di VM
+variable "numero_vm" {
+  description = "Numero di istanze VM da creare"
+  type        = number
+  
+}
+
+# 2. Risorsa con iterazione (count)
 resource "google_compute_instance" "pippo" {
-  name         = "riva"
+  count        = var.numero_vm
+  name         = "riva-${count.index}"
   machine_type = "e2-micro"
-  zone         = "europe-west1-b"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
