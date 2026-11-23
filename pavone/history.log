@@ -1,0 +1,174 @@
+    1  commit
+    2  terraform -v
+    3  terraform init
+    4  history >> history.log
+    1  commit
+    2  terraform -v
+    3  terraform init
+    4  histoty >> history.log
+    5  history >> history.log
+    6  terraform apply
+    7  echo $GOOGLE_APPLICATION-CREDENTIALS
+    8  echo $GOOGLE_APPLICATION_CREDENTIALS
+    9  cd /workspaces/2025-27.NC-A/pavone
+   10  terraform fmt
+   11  terraform apply
+   12  terraform fmt
+   13  terraform apply
+   14  terraform fmt
+   15  terraform apply
+   16  cd /workspaces/2025-27.NC-A/pavone
+   17  terraform fmt
+   18  terraform apply
+   19  cd /workspaces/2025-27.NC-A/pavone
+   20  cat << 'EOF' > main.tf
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 6.0.0"
+    }
+  }
+}
+
+provider "google" {
+  credentials = file("exalted-pattern-424313-j3-41106fd4cb4e.json")
+  project     = "exalted-pattern-424313-j3"
+  region      = "us-central1"
+  zone        = "us-central1-b"
+}
+
+resource "google_compute_instance" "vm" {
+  name         = "pavone"
+  machine_type = "e2-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-12"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
+EOF
+
+   21  terraform fmt
+   22  terraform apply -auto-approve
+   23  cd /workspaces/2025-27.NC-A/pavone
+   24  terraform destroy -auto-approve
+   25  terraform apply -auto-approve
+   26  history >> history.log
+    1  commit
+    2  terraform -v
+    3  terraform init
+    4  histoty >> history.log
+    5  history >> history.log
+    6  terraform apply
+    7  echo $GOOGLE_APPLICATION-CREDENTIALS
+    8  echo $GOOGLE_APPLICATION_CREDENTIALS
+    9  cd /workspaces/2025-27.NC-A/pavone
+   10  terraform fmt
+   11  terraform apply
+   12  terraform fmt
+   13  terraform apply
+   14  terraform fmt
+   15  terraform apply
+   16  cd /workspaces/2025-27.NC-A/pavone
+   17  terraform fmt
+   18  terraform apply
+   19  cd /workspaces/2025-27.NC-A/pavone
+   20  cat << 'EOF' > main.tf
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 6.0.0"
+    }
+  }
+}
+
+provider "google" {
+  credentials = file("exalted-pattern-424313-j3-41106fd4cb4e.json")
+  project     = "exalted-pattern-424313-j3"
+  region      = "us-central1"
+  zone        = "us-central1-b"
+}
+
+resource "google_compute_instance" "vm" {
+  name         = "pavone"
+  machine_type = "e2-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-12"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
+EOF
+
+   21  terraform fmt
+   22  terraform apply -auto-approve
+   23  cd /workspaces/2025-27.NC-A/pavone
+   24  terraform destroy -auto-approve
+   25  terraform apply -auto-approve
+   26  history >> history.log
+   27  git add main.tf history.log .terraform.lock.hcl
+   28  git commit -m "ricreata VM pavone in us-central1-b"
+   29  git push
+   30  cd /workspaces/2025-27.NC-A/pavone
+   31  cat << 'EOF' > main.tf
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = ">= 6.0.0"
+    }
+  }
+}
+
+provider "google" {
+  credentials = file("exalted-pattern-424313-j3-41106fd4cb4e.json")
+  project     = "exalted-pattern-424313-j3"
+  region      = "us-central1"
+  zone        = "us-central1-b"
+}
+
+variable "numero_vm" {
+  description = "Numero di macchine virtuali da creare"
+  type        = number
+  default     = 3
+}
+
+resource "google_compute_instance" "vm" {
+  count        = var.numero_vm
+  name         = "pavone-${count.index + 1}"
+  machine_type = "e2-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-12"
+    }
+  }
+
+  network_interface {
+    network = "default"
+  }
+}
+
+output "macchine_create" {
+  description = "Elenco delle macchine virtuali create"
+  value       = [for m in google_compute_instance.vm : m.name]
+}
+EOF
+
+   32  terraform fmt
+   33  terraform apply -auto-approve
+   34  history >> history.log
+    1  cd /workspaces/2025-27.NC-A/pavone
+    2  history >> history.log
