@@ -13,7 +13,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "debian12" {
-  name         = "debian12-vm"
+  name         = "disanto-vm"
   machine_type = "e2-micro"
   zone         = "us-central1-a"
 
