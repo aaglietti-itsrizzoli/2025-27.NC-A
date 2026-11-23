@@ -1,4 +1,14 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "8.12.0"
+    }
+  }
+}
+
+
 provider "google" {
-  project     = "my-project-id"
-  region      = "us-central1"
+  # Configuration options
+  project = "exalted-pattern-424313-j3"
 }
