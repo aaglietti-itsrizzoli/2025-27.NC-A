@@ -13,10 +13,17 @@ provider "google" {
   zone    = "us-central1-a"
 }
 
+# Cambia questo numero per decidere quante macchine creare
+variable "numero_macchine" {
+  type    = number
+  default = 3
+}
+
 resource "google_compute_instance" "vm_economica" {
-  name         = "coppola"
+  count        = var.numero_macchine
+  name         = "coppola-${count.index + 1}"
   machine_type = "e2-micro"
-  zone         = "us-central1-a"
+  zone         = "us-central1-b"
 
   boot_disk {
     initialize_params {
